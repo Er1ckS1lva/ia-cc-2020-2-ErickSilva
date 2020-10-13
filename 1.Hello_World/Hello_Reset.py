@@ -12,7 +12,7 @@ if __name__ == "__main__":
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
     app = QApplication([])
 
-    window = uic.loadUi(r"ia-cc-2020-2-ErickSilva\1.Hello_World\hello_world.ui")
+    window = uic.loadUi(r"C:\Users\erick\OneDrive\Área de Trabalho\IFTM-AULAS\IA\ia-cc-2020-2-ErickSilva\1.Hello_World\hello_world.ui")
 
     hello_label = window.findChild(QLabel, 'helloLabel')
     hello_label.setVisible(False)
