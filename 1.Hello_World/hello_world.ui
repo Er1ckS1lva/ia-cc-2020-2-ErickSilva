@@ -59,8 +59,8 @@
   </widget>
   <action name="actionReset">
    <property name="icon">
-    <iconset resource="aa.qrc">
-     <normaloff>:/newPrefix/1/Hello_World/reset_128x128.png</normaloff>:/newPrefix/1/Hello_World/reset_128x128.png</iconset>
+    <iconset>
+     <normaloff>reset_128x128.png</normaloff>reset_128x128.png</iconset>
    </property>
    <property name="text">
     <string>Reset</string>
