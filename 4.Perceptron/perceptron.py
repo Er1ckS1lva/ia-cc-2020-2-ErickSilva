@@ -1,5 +1,5 @@
 entradas = []
-arquivo = open('entradas.txt', 'r')
+arquivo = open(r'4.Perceptron\entradas.txt', 'r')
 for linhas in arquivo:
     vetor_entradas = linhas.split(',')
     entradas.append(vetor_entradas)
@@ -18,10 +18,13 @@ for i in range(len(entradas)):
 
 alfa = 1
 aprendendo = True
+epocas = 0
 
 
 while(aprendendo):
+    epocas += 1
     for i in range(len(entradas)):
+        
         somatorio = 0
         x = []
         for j in range(len(entradas[i])-2):
@@ -48,3 +51,5 @@ while(aprendendo):
                     pesos[j] = int(pesos[j])+(alfa*int(saidas[j]))
 
         print('\nEntradas=',x,'Saida=',saidas[i],'Pesos=',pesos)
+epocas += 1
+print('Epocas = '+str(epocas))

@@ -1,11 +1,12 @@
 from PyQt5 import QtCore, uic, QtWidgets
 from PyQt5.QtWidgets import QAction, QApplication, QLabel,QPushButton,QRadioButton, QSpinBox
+import operacoes
 
 #(x1,x2,baias)
 treino_inicial = [(1,1,1),(1,-1,1),(-1,1,1),(-1,-1,1)]
 epocas = 0
 saida_esperada = [1,-1,-1,-1]
-pesos = []
+pesos = [0,0,0]
 hebb_bol = True
 
 def treino():
@@ -78,6 +79,18 @@ def perceptroon():
     epoca.setText('Epocas = '+str(epocas))
 
 
+def operar():
+
+    global pesos
+    x1 = entrada1.value()
+    x2 = entrada2.value()
+  
+    if hebb_.isChecked():
+        operacoes.opr(1,x1,x2,pesos)
+    elif percep.isChecked():
+        operacoes.opr(2,x1,x2,pesos)
+
+
 
 
 if __name__ == "__main__":
@@ -85,7 +98,7 @@ if __name__ == "__main__":
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
     app = QApplication([])
 
-    Pyqt = uic.loadUi("Ui\layout.ui")
+    Pyqt = uic.loadUi(r"5.Gui_Hebb_Perceptron\Ui\layout.ui")
     
     #Labels
     epoca = Pyqt.findChild(QLabel, 'epoca')
@@ -111,6 +124,7 @@ if __name__ == "__main__":
     treinar.clicked.connect(treino)
 
     testar = Pyqt.findChild(QPushButton,'testar')
+    testar.clicked.connect(operar)
 
     hebb_ = Pyqt.findChild(QRadioButton,'hebb')
     hebb_.setChecked(1)
