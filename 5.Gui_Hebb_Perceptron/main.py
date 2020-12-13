@@ -3,10 +3,14 @@ from PyQt5.QtWidgets import QAction, QApplication, QLabel,QPushButton,QRadioButt
 import operacoes
 
 #(x1,x2,baias)
-treino_inicial = [(1,1,1),(1,-1,1),(-1,1,1),(-1,-1,1)]
+treino11 = [(1,1,1),(1,-1,1),(-1,1,1),(-1,-1,1)]
+treino10 = [(1,1,1),(1,0,1),(0,1,1),(0,0,1)]
+treino_inicial = treino11
 epocas = 0
-saida_esperada = [1,-1,-1,-1]
-pesos = [0,0,0]
+saida_esperada11 = [1,-1,-1,-1]
+saida_esperada10 = [1,0,0,0]
+saida_esperada = saida_esperada11
+pesos = []
 hebb_bol = True
 
 def treino():
@@ -45,34 +49,38 @@ def perceptroon():
     epocas = 0
     pesos = [0,0,0]
     alfa = 1
-    
+    teta = 0
+    teste =0
+
     aprendendo = True
     while(aprendendo):
         epocas+=1
+        teste = 0
         for i in range(len(treino_inicial)):
             somatorio = 0
-            y=-1     
+            somatorio += int(treino_inicial[i][2])
             for j in range(len(treino_inicial[i])-1):
                 somatorio += int(treino_inicial[i][j]) * int(pesos[j])                              
-            somatorio += int(treino_inicial[i][2])
-            
-            if(somatorio > alfa):
+                      
+            if(somatorio > teta):
                 y = 1
-            elif((somatorio>=-alfa)and(somatorio<=alfa)):
+            elif((somatorio>=-teta)and(somatorio<=teta)):
                 y = 0
-            elif(somatorio < -alfa):
+            elif(somatorio < -teta):
                 y = -1
             
             if(int(saida_esperada[i]) == y):
-                aprendendo = False
+                teste += 1
+                if teste == 1:
+                    aprendendo = False
             else:
                 tamanho = len(pesos)
                 for j in range(tamanho):
-                    pesos[j] = int(pesos[j]) + (alfa*int(saida_esperada[j])*somatorio)
-                    if j == tamanho-1:
-                        pesos[j] = int(pesos[j])+(alfa*int(saida_esperada[j]))
-
-    
+                    if j == 2:
+                        pesos[j] = int(pesos[j])+(alfa*int(saida_esperada[i]))
+                    else:
+                        pesos[j] = int(pesos[j]) + (alfa*int(saida_esperada[i])*treino_inicial[i][j])
+                    
     pesos_values_1.setText('w1 = '+str(pesos[0]))
     pesos_values_2.setText('w2 = '+str(pesos[1]))
     pesos_values_baias.setText('wb = '+str(pesos[2]))
@@ -86,11 +94,30 @@ def operar():
     x2 = entrada2.value()
   
     if hebb_.isChecked():
-        operacoes.opr(1,x1,x2,pesos)
+        hebb()
+        value = operacoes.hebb(x1,x2,1,pesos)
+        resultado.setText('Resultado = '+str(value))
     elif percep.isChecked():
-        operacoes.opr(2,x1,x2,pesos)
+        perceptroon()
+        value = operacoes.percp(x1,x2,1,pesos)
+        resultado.setText('Resultado = '+str(value))
 
 
+def trocar_treino():
+    global treino11,treino10,treino_inicial,saida_esperada,saida_esperada10,saida_esperada11
+
+    value = treino_values.value()
+    if value == -1:
+        treino_inicial = treino11
+        saida_esperada = saida_esperada11
+        input_treinamento.setText(str(treino_inicial))
+        output_treinamento.setText(str(saida_esperada))
+
+    elif value == 0:
+        treino_inicial = treino10
+        saida_esperada = saida_esperada10
+        input_treinamento.setText(str(treino_inicial))
+        output_treinamento.setText(str(saida_esperada))
 
 
 if __name__ == "__main__":
@@ -134,6 +161,10 @@ if __name__ == "__main__":
 
     entrada1 = Pyqt.findChild(QSpinBox,'dado1')
     entrada2 = Pyqt.findChild(QSpinBox,'dado2')
+
+    treino_values = Pyqt.findChild(QSpinBox,'treinos_values')
+    treino_values.setValue(-1)
+    treino_values.valueChanged.connect(trocar_treino)
 
     Pyqt.show()
     app.exec_()

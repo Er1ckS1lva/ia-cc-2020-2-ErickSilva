@@ -157,6 +157,9 @@
      </item>
      <item>
       <widget class="QSpinBox" name="dado1">
+       <property name="minimum">
+        <number>-1</number>
+       </property>
        <property name="maximum">
         <number>1</number>
        </property>
@@ -164,6 +167,9 @@
      </item>
      <item>
       <widget class="QSpinBox" name="dado2">
+       <property name="minimum">
+        <number>-1</number>
+       </property>
        <property name="maximum">
         <number>1</number>
        </property>
@@ -260,6 +266,22 @@
     </property>
     <property name="text">
      <string>Epocas = </string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="treinos_values">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>100</y>
+      <width>42</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>-1</number>
+    </property>
+    <property name="maximum">
+     <number>0</number>
     </property>
    </widget>
   </widget>
