@@ -58,7 +58,7 @@ def perceptroon():
         teste = 0
         for i in range(len(treino_inicial)):
             somatorio = 0
-            somatorio += int(treino_inicial[i][2])
+            somatorio += int(pesos[2])
             for j in range(len(treino_inicial[i])-1):
                 somatorio += int(treino_inicial[i][j]) * int(pesos[j])                              
                       

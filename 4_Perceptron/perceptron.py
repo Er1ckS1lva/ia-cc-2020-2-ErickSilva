@@ -1,11 +1,11 @@
 entradas = []
-arquivo = open(r'4.Perceptron\entradas.txt', 'r')
+arquivo = open(r'4_Perceptron\entradas.txt', 'r')
+
 for linhas in arquivo:
     vetor_entradas = linhas.split(',')
     entradas.append(vetor_entradas)
 
 pesos = []
-
 
 for i in range(len(entradas[0])-1):
     pesos.append(0)
