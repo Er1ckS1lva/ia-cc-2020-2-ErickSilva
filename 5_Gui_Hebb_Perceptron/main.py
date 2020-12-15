@@ -61,14 +61,14 @@ def perceptroon():
             somatorio += int(pesos[2])
             for j in range(len(treino_inicial[i])-1):
                 somatorio += int(treino_inicial[i][j]) * int(pesos[j])                              
-                      
+
             if(somatorio > teta):
                 y = 1
             elif((somatorio>=-teta)and(somatorio<=teta)):
                 y = 0
             elif(somatorio < -teta):
                 y = -1
-            
+
             if(int(saida_esperada[i]) == y):
                 teste += 1
                 if teste == 1:
@@ -80,7 +80,8 @@ def perceptroon():
                         pesos[j] = int(pesos[j])+(alfa*int(saida_esperada[i]))
                     else:
                         pesos[j] = int(pesos[j]) + (alfa*int(saida_esperada[i])*treino_inicial[i][j])
-                    
+
+
     pesos_values_1.setText('w1 = '+str(pesos[0]))
     pesos_values_2.setText('w2 = '+str(pesos[1]))
     pesos_values_baias.setText('wb = '+str(pesos[2]))
@@ -125,7 +126,8 @@ if __name__ == "__main__":
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
     app = QApplication([])
 
-    Pyqt = uic.loadUi(r"5.Gui_Hebb_Perceptron\Ui\layout.ui")
+    #Pyqt = uic.loadUi(r"5.Gui_Hebb_Perceptron\Ui\layout.ui")
+    Pyqt = uic.loadUi("Ui/layout.ui")
     
     #Labels
     epoca = Pyqt.findChild(QLabel, 'epoca')
