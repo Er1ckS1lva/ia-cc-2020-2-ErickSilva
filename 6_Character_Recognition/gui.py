@@ -11,7 +11,7 @@ NUM_OF_NEURONS = 10
 class Gui:
     def __init__(self):
         # loading widgets elements from ui file
-        self.window = uic.loadUi("6.Character_Recognition\character_recognition.ui")
+        self.window = uic.loadUi(r"6_Character_Recognition\character_recognition.py")
 
         # Getting widget references
         self.black = QIcon("black.png")
