@@ -1,17 +1,29 @@
 import sys
 from PyQt5 import QtCore, uic
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QComboBox, \
+from PyQt5.QtWidgets import QAction, QApplication, QComboBox, QMenu, \
     QPushButton, QLabel, QMessageBox
+import perceptron
 
 
 NUM_OF_NEURONS = 10
+font = "numbers.txt"
+value = ""
+percp = perceptron.Perceptron()
+
+
+def font_change(op):
+        global font
+        if int(op) == 1:
+            font = "numbers.txt"
+        elif int(op) == 2:
+            font = "font_c.txt"
 
 
 class Gui:
     def __init__(self):
         # loading widgets elements from ui file
-        self.window = uic.loadUi(r"6_Character_Recognition\character_recognition.py")
+        self.window = uic.loadUi("character_recognition.ui")
 
         # Getting widget references
         self.black = QIcon("black.png")
@@ -19,11 +31,17 @@ class Gui:
         self.character_cb = self.window.findChild(QComboBox, "characterComboBox")
         self.train_pb = self.window.findChild(QPushButton, "trainPushButton")
         self.run_pb = self.window.findChild(QPushButton, "runPushButton")
+        self.output = self.window.findChild(QLabel, "Label_Saida")
+        self.menu_fontes = self.window.findChild(QMenu, "menuFontes")
+        self.fonte_a = self.window.findChild(QAction, "actionFonte_A")
+        self.fonte_b = self.window.findChild(QAction, "actionFonte_B")
 
         # Connecting Signals
         self.character_cb.currentIndexChanged.connect(self.on_character_combobox_current_index_changed)
         self.train_pb.clicked.connect(self.on_train_pushbutton_clicked)
         self.run_pb.clicked.connect(self.on_run_pushbutton_clicked)
+        self.fonte_a.triggered.connect(lambda: font_change(1))
+        self.fonte_b.triggered.connect(lambda: font_change(2))
 
         # Input list starts with -1 values
         # which means a white screen
@@ -40,6 +58,7 @@ class Gui:
         self.training_set = []
         self.font_a = []
         self.populate_training_set()
+
 
     def on_character_combobox_current_index_changed(self):
         if int(self.character_cb.currentText()) == -1:
@@ -853,10 +872,14 @@ class Gui:
             self.inputs[79] = -1
     
     def on_run_pushbutton_clicked(self):
-        print("Run clicked")
+        global value
+        value = percp.__init__()
+        
+        
 
     def on_train_pushbutton_clicked(self):
-        print("Train clicked")
+        self.output.setText("Treinado !!!")
+        
 
     def populate_pixels_list(self):
         # Hard coding: display 10x8
@@ -867,7 +890,8 @@ class Gui:
                 self.pixels[-1].clicked.connect(getattr(self, "on_pixel_" + str(i) + str(j) + "_clicked"))
 
     def populate_training_set(self):
-        f = open(r"6.Character_Recognition\numbers.txt").readlines()
+        global font
+        f = open(font).readlines()
         aux = []
         for line in f:
             if line.startswith("#"):

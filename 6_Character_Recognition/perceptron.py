@@ -1,7 +1,6 @@
 # Perceptron Class
 # Class to calculate weights using the Perceptron Rule
 
-
 class Perceptron:
     def __init__(self):
         self.w_bias = 0.0
@@ -33,7 +32,6 @@ class Perceptron:
     def calculate_net(self, inputs):
         net = 0.0
 
-        # net = bias + xi * wi
         for i in range(len(inputs)):
             net += inputs[i] * self.weights[i]
         net += self.w_bias
@@ -105,11 +103,6 @@ if __name__ == "__main__":
      ([1, -1], -1),
      ([-1, 1], -1),
      ([-1, -1], -1)]
-
-    # ts = [([1, 1], 1),
-    #       ([1, 0], -1),
-    #       ([0, 1], -1),
-    #       ([0, 0], -1)]
 
     perceptron = Perceptron()
     perceptron.update_parameters(ts, 0, 0, 1)

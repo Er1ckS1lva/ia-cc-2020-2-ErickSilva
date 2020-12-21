@@ -2468,6 +2468,12 @@
     </item>
     <item>
      <widget class="QComboBox" name="characterComboBox">
+      <property name="currentText">
+       <string>0</string>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
       <item>
        <property name="text">
         <string>-1</string>
@@ -2539,6 +2545,13 @@
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="QLabel" name="Label_Saida">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -2547,11 +2560,29 @@
      <x>0</x>
      <y>0</y>
      <width>440</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFontes">
+    <property name="title">
+     <string>Fontes</string>
+    </property>
+    <addaction name="actionFonte_A"/>
+    <addaction name="actionFonte_B"/>
+   </widget>
+   <addaction name="menuFontes"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionFonte_A">
+   <property name="text">
+    <string>Fonte A</string>
+   </property>
+  </action>
+  <action name="actionFonte_B">
+   <property name="text">
+    <string>Fonte B</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="resource.qrc"/>
